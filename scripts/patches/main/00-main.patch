@@ -1,0 +1,11 @@
+--- apps/websocket/src/main.ts     2025-12-23 17:43:29.119721388 +0000
++++ apps/websocket/src/main.ts       2025-12-23 17:55:08.625730421 +0000
+@@ -10,7 +10,7 @@
+ const logger = createLogger({ module: "websocketMain" });
+
+ const wss = new WebSocketServer({
+-  port: 3001,
++  port: __PORT_WEBSOCKET__,
+ });
+ const handler = applyWSSHandler({
+   wss,
