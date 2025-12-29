@@ -17,6 +17,9 @@ ynh_systemctl --service=$app-wss --action="stop"
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression "Saving existing DB..."
+cp -pr "$install_dir/db.sqlite" "/tmp/${app}.db.sqlite"
+
 ynh_script_progression "Upgrading source files..."
 
 ynh_setup_source --dest_dir="$install_dir" --full_replace=1 --keep=".env db.sqlite"
@@ -58,6 +61,10 @@ pushd $install_dir
     mkdir -p build
     cp $install_dir/node_modules/better-sqlite3/build/Release/better_sqlite3.node $install_dir/build/better_sqlite3.node
     pnpm store prune
+
+
+ynh_script_progression "Skipping DB migration ?..."
+
 popd
 
 #=================================================
