@@ -50,7 +50,7 @@ pushd $install_dir
 
   ynh_script_progression "DB Migrating..."
   
-#  ynh_exec_as_app pnpm run db:migration:sqlite:run
+  ynh_exec_as_app pnpm run db:migration:sqlite:run
   
   ynh_script_progression "Building the app..."
   
@@ -58,7 +58,7 @@ pushd $install_dir
 
       mkdir -p build
       cp $install_dir/node_modules/better-sqlite3/build/Release/better_sqlite3.node $install_dir/build/better_sqlite3.node
-  pnpm store prune
+#  pnpm store prune
 
 popd
 
