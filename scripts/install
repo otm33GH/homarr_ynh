@@ -51,7 +51,7 @@ pushd $install_dir
   ynh_script_progression "DB Migrating..."
   
   pnpm run db:migration:sqlite:run
-  
+sleep 120  
   ynh_script_progression "Building the app..."
   
   TURBO_TELEMETRY_DISABLED=1 NEXT_FORCE_TURBOPACK=0 pnpm build
