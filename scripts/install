@@ -55,7 +55,7 @@ pushd $install_dir
   ynh_script_progression "Building the app..."
   
   TURBO_TELEMETRY_DISABLED=1 NEXT_FORCE_TURBOPACK=0 pnpm build
-
+sleep 300
       mkdir -p build
       cp $install_dir/node_modules/better-sqlite3/build/Release/better_sqlite3.node $install_dir/build/better_sqlite3.node
 #  pnpm store prune
