@@ -20,8 +20,6 @@ ynh_app_setting_set --key=redis_db --value=$redis_db
 #=================================================
 ynh_script_progression "Installing dependencies..."
 
-#npm install -g pnpm
-# https://github.com/pnpm/pnpm/issues/8949
 npm install --global corepack@latest
 corepack enable pnpm
 corepack use pnpm@latest
@@ -33,12 +31,6 @@ ynh_script_progression "Setting up source files..."
 
 ynh_setup_source --dest_dir="$install_dir"
 
-#=================================================
-# ADD A CONFIGURATION
-#=================================================
-ynh_script_progression "Adding $app's configuration..."
-
-ynh_config_add --template=".env" --destination="$install_dir/.env"
 
 #=================================================
 # INSTALL HOMARR
@@ -47,6 +39,10 @@ ynh_script_progression "Installing the app..."
 
 pushd $install_dir
   pnpm install 
+
+ynh_script_progression "Adding $app's configuration..."
+
+ynh_config_add --template=".env" --destination="$install_dir/.env"
 
   ynh_script_progression "DB Migrating..."
   
