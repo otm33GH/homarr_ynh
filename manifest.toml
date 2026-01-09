@@ -56,7 +56,10 @@ ram.runtime = "2G"
     main.auth_headers = false
 
     [resources.apt]
-    packages = "sqlite3, redis-server, ca-certificates" 
+    packages = "postgresql, redis-server, ca-certificates" 
 
     [resources.nodejs]
     version = "24"
+    
+    [resources.database]
+    type = "postgresql"
