@@ -46,7 +46,7 @@ ynh_script_progression "Adding $app's configuration..."
 
 ynh_script_progression "DB Migrating..."
   
-  ynh_exec_as_app pnpm run db:migration:postgres:run
+  ynh_exec_as_app pnpm run db:migration:postgresql:run
 
 ynh_script_progression "Building the app..."
   
