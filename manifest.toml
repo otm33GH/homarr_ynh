@@ -62,4 +62,5 @@ ram.runtime = "2G"
     version = "24"
     
     [resources.database]
-    type = "postgresql-16"
+    type = "postgresql"
+    version = "16"
