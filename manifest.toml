@@ -19,7 +19,7 @@ code = "https://github.com/homarr-labs/homarr"
 [integration]
 yunohost = ">= 12.1.36"
 helpers_version = "2.1"
-architectures = ["amd64" "arm64"]
+architectures = ["amd64", "arm64"]
 multi_instance = false
 
 ldap = true
