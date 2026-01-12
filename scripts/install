@@ -56,7 +56,7 @@ ynh_script_progression "Build the app..."
 # ynh_exec_as_app NODE_OPTIONS="--max-old-space-size=4096" TURBO_TELEMETRY_DISABLED=1 pnpm build --concurrency=1 
 
 ynh_script_progression "db migrate the app..."
-DISABLE_REDIS_LOGS=true node ./db/migrations/sqlite/migrate.cjs ./db/migrations/sqlite
+DISABLE_REDIS_LOGS=true URL=https://$domain node ./db/migrations/sqlite/migrate.cjs ./db/migrations/sqlite
 node apps/tasks/tasks.cjs
 node apps/websocket/wssServer.cjs
 node apps/nextjs/server.js
