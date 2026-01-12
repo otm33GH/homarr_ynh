@@ -1,66 +1,20 @@
---- a/apps/websocket/src/main.ts
-+++ b/apps/websocket/src/main.ts
-@@ -10,8 +10,8 @@
- const logger = createLogger({ module: "websocketMain" });
- 
- const wss = new WebSocketServer({
--  port: 3001,
--});
+--- a/apps/websocket/wssServer.cjs
++++ b/apps/websocket/wssServer.cjs
+@@ -653144,8 +653144,6 @@
+     } : {},
+     ...authProviders.includes("ldap") ? {
+       AUTH_LDAP_URI: external_exports.string().url(),
+-      AUTH_LDAP_BIND_DN: external_exports.string(),
+-      AUTH_LDAP_BIND_PASSWORD: external_exports.string(),
+       AUTH_LDAP_BASE: external_exports.string(),
+       AUTH_LDAP_SEARCH_SCOPE: external_exports.enum(["base", "one", "sub"]).default("base"),
+       AUTH_LDAP_USERNAME_ATTRIBUTE: external_exports.string().default("uid"),
+@@ -792041,7 +792039,7 @@
+ init_common();
+ var logger67 = createLogger({ module: "websocketMain" });
+ var wss = new import_websocket_server.default({
+-  port: 3001
 +  port: Number(process.env.PORT_WEBSOCKET) || 3003,
-+  });
- const handler = applyWSSHandler({
+ });
+ var handler2 = applyWSSHandler({
    wss,
-   router: appRouter,
-
---- a/packages/auth/env.ts
-+++ b/packages/auth/env.ts
-@@ -45,8 +45,8 @@
-     ...(authProviders.includes("ldap")
-       ? {
-           AUTH_LDAP_URI: z.string().url(),
--          AUTH_LDAP_BIND_DN: z.string(),
--          AUTH_LDAP_BIND_PASSWORD: z.string(),
-+//        AUTH_LDAP_BIND_DN: z.string(),
-+//        AUTH_LDAP_BIND_PASSWORD: z.string(),
-           AUTH_LDAP_BASE: z.string(),
-           AUTH_LDAP_SEARCH_SCOPE: z.enum(["base", "one", "sub"]).default("base"),
-           AUTH_LDAP_USERNAME_ATTRIBUTE: z.string().default("uid"),
-
---- a/packages/auth/providers/credentials/authorization/ldap-authorization.ts 
-+++ b/packages/auth/providers/credentials/authorization/ldap-authorization.ts
-@@ -19,14 +19,14 @@
- ) => {
-   logger.info("User is trying to log in using LDAP. Connecting to LDAP server...", { userName: credentials.name });
-   const client = new LdapClient();
--  await client
--    .bindAsync({
--      distinguishedName: env.AUTH_LDAP_BIND_DN,
--      password: env.AUTH_LDAP_BIND_PASSWORD,
--    })
--    .catch((error) => {
--      throw new CredentialsSignin("Failed to connect to LDAP server", { cause: error });
--    });
-+//  await client
-+//    .bindAsync({
-+//      distinguishedName: env.AUTH_LDAP_BIND_DN,
-+//      password: env.AUTH_LDAP_BIND_PASSWORD,
-+//    })
-+//    .catch((error) => {
-+//      throw new CredentialsSignin("Failed to connect to LDAP server", { cause: error });
-+//    });
- 
-   logger.info("Connected to LDAP server. Searching for user...");
-   
---- a/packages/auth/providers/test/ldap-authorization.spec.ts
-+++ b/packages/auth/providers/test/ldap-authorization.spec.ts
-@@ -12,8 +12,8 @@
-
- vi.mock("../../env", () => ({
-   env: {
--    AUTH_LDAP_BIND_DN: "bind_dn",
--    AUTH_LDAP_BIND_PASSWORD: "bind_password",
-+//    AUTH_LDAP_BIND_DN: "bind_dn",
-+//    AUTH_LDAP_BIND_PASSWORD: "bind_password",
-     AUTH_LDAP_USER_MAIL_ATTRIBUTE: "mail",
-     AUTH_LDAP_GROUP_CLASS: "group",
-   },
