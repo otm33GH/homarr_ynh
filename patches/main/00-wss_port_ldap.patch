@@ -18,3 +18,14 @@
  });
  var handler2 = applyWSSHandler({
    wss,
+--- a/apps/tasks/tasks.cjs
++++ b/apps/tasks/tasks.cjs
+@@ -724389,8 +724389,6 @@
+     } : {},
+     ...authProviders.includes("ldap") ? {
+       AUTH_LDAP_URI: external_exports.string().url(),
+-      AUTH_LDAP_BIND_DN: external_exports.string(),
+-      AUTH_LDAP_BIND_PASSWORD: external_exports.string(),
+       AUTH_LDAP_BASE: external_exports.string(),
+       AUTH_LDAP_SEARCH_SCOPE: external_exports.enum(["base", "one", "sub"]).default("base"),
+       AUTH_LDAP_USERNAME_ATTRIBUTE: external_exports.string().default("uid"),
