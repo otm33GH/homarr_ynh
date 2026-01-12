@@ -60,9 +60,9 @@ set -a
 source .env
 set +a
 DISABLE_REDIS_LOGS=true node ./db/migrations/sqlite/migrate.cjs ./db/migrations/sqlite
-node apps/tasks/tasks.cjs
-node apps/websocket/wssServer.cjs
-node apps/nextjs/server.js
+#node apps/tasks/tasks.cjs
+#node apps/websocket/wssServer.cjs
+#node apps/nextjs/server.js
 
 # ynh_exec_as_app pnpm run db:migration:sqlite:run
 #    mkdir -p build
